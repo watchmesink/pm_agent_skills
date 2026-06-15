@@ -1,40 +1,74 @@
 ---
 name: write-prd
-description: Draft, revise, or structure Product Requirements Documents in a narrative product style. Use when Codex needs to create a PRD, product brief, feature requirements document, jobs-to-be-done section, numbered product requirements, or convert rough feature notes into a clear PRD with Situation, Problem, Solution, Jobs to Be Done, and Requirements.
+description: Draft, revise, or structure product framing PRDs centered on problem space, jobs to be done, success criteria, scope boundaries, and a concise high-level solution. Use when Codex needs to create a PRD, product brief, feature framing document, jobs-to-be-done section, success criteria, scope narrative, or convert rough feature notes into an iterative PRD process that keeps asking fresh, non-repeated clarifying questions until the user explicitly asks to craft the PRD.
 ---
 
 # Write PRD
 
 ## Overview
 
-Create PRDs that start from context and customer/product pressure, then narrow into numbered problems, solutions, jobs to be done, and lean product requirements. Prefer a sharp product narrative over a generic template.
+Create framing-first PRDs. The goal is to define the product scope through the problem space, jobs to be done, success criteria, and a concise high-level solution, not to replace design exploration or engineering planning.
+
+Prefer a sharp product narrative over a generic requirements template. Treat each PRD as an iterative discovery artifact: first clarify the frame through as many fresh question rounds as needed, then draft only after the user explicitly asks to craft the PRD.
 
 ## Workflow
 
-1. Gather the source material: feature brief, user feedback, market movement, product constraints, existing screenshots/docs, related issues, and any desired audience.
-2. Treat PRD creation as an iterative discovery conversation. Keep asking focused follow-up questions while meaningful product uncertainty remains, and stop only when the user asks to draft, proceed, stop asking, or explicitly requests a best-effort draft.
-3. Focus clarifying questions on the Problem, Solution, and Jobs to be done sections. Ask about requirements only when a missing requirement-level decision is fundamental to the product direction or would make the PRD misleading.
-4. Draft directly only when the user asks to draft, proceed, stop asking questions, or requests a best-effort draft. State minor non-blocking assumptions in the relevant section instead of inventing specifics.
-5. Load `references/prd-template.md` when drafting a full PRD or when the user asks for the preferred structure.
-6. Write the Situation first as a narrative, then write the remaining core sections as numbered lists.
-7. Keep requirements concrete enough to guide product direction, but not so detailed that they replace design or engineering judgment. Use `must` for firm requirements and `should` for strong product direction that may allow implementation discretion.
-8. Use only the preferred structure below unless the user explicitly asks for another section.
+1. Gather the source material: feature brief, user feedback, current product behavior, target users, related issues, business pressure, screenshots/docs, constraints, and the intended audience.
+2. Start with a short working frame: summarize the apparent user, problem, core job, success outcome, and likely solution direction in 3-5 bullets. Mark uncertain points plainly.
+3. Ask a small batch of high-impact clarifying questions before drafting unless the user's current message explicitly asks to craft, draft, write, or produce the PRD now.
+4. Keep the discovery loop active indefinitely while the user keeps answering questions. Ask follow-up questions in focused batches; do not turn this into a long questionnaire.
+5. Never treat a clear frame as permission to draft. Draft only when the user explicitly asks to craft, draft, write, produce, proceed with, or create the PRD. `Stop asking questions` alone is not enough unless it also asks to start the PRD.
+6. Load `references/prd-template.md` when drafting a full PRD or when the user asks for the preferred structure.
+7. Keep detailed functional requirements optional. Include them only when the user asks for requirements or when a requirement-level decision is necessary to make the scope honest.
+8. State minor non-blocking assumptions in the relevant section. Ask before drafting when missing information could change the problem framing, jobs, success criteria, scope boundaries, or solution direction.
 
-## Clarifying Questions
+## Discovery Loop
 
-Ask questions when missing information would make the Problem, Solution, or Jobs to be done vague, unconvincing, or likely wrong. Prefer asking before drafting over filling gaps silently, and continue with follow-up questions until the user signals that the discovery loop should stop.
+Use questions to improve framing, not to collect implementation detail. Prefer 3-6 questions per round. Each question should make the eventual draft materially clearer.
 
-Trigger clarifying questions for missing details such as:
+Maintain a running mental list of questions already asked and topics already answered in the current conversation. Do not ask the same question twice, and do not ask a semantic duplicate with different wording. If an answer is unclear, ask a narrower follow-up that points to the specific unresolved gap instead of repeating the original question.
 
-- Target users, release surface, or product edition.
-- Current behavior and the specific limitation being changed.
-- Primary user flow, entry points, and expected end state.
-- Scope boundaries or exclusions when they change the product story.
-- Data model, permissions, privacy, retention, or cross-device behavior only when they shape the core user experience or product direction.
-- Success criteria when they clarify the problem or intended outcome.
-- Known technical, business, legal, or platform constraints that affect the user experience.
+When asking the first round, use this shape:
 
-When asking, include only the questions needed to make the next PRD draft more concrete. Prefer small batches of high-impact questions over long questionnaires. Do not ask detailed requirements or acceptance-criteria questions unless they are fundamental to the product direction.
+1. `Current frame:` 3-5 bullets summarizing the apparent user, problem, job, success outcome, and solution direction.
+2. `Questions:` 3-6 focused questions ordered by impact.
+
+After each user answer, refresh the `Current frame` only when it helps orient the next round, then ask the next non-repeated questions. Continue this discovery loop until the user explicitly tells you to start crafting the PRD.
+
+After drafting, treat the PRD as a candidate frame. Ask the user to correct the problem space, jobs, success criteria, or solution direction before polishing wording or adding optional requirements.
+
+### First Round Priorities
+
+Ask about the highest-impact unknowns in this order:
+
+1. **Problem space:** Who has the problem, what happens today, where the current workflow breaks, and why this matters now.
+2. **Jobs to be done:** What users are trying to accomplish, what outcome they need, and which situations should define the scope.
+3. **Success criteria:** What product/user/business signals would prove the problem is solved or meaningfully reduced.
+4. **High-level solution:** What product direction is already intended, what must stay flexible for design, and what alternatives are explicitly not the goal.
+5. **Scope boundaries:** Which users, editions, surfaces, workflows, or cases are in scope now, later, or out of scope.
+
+### Follow-Up Rules
+
+- Ask a follow-up when the user's answer is broad, contradictory, solution-heavy without a clear problem, or missing the user outcome.
+- Prefer "which of these is the primary driver?" questions when multiple possible problems or jobs appear.
+- Ask for concrete examples of current pain when the problem sounds abstract.
+- Ask for success criteria before requirements; success criteria should describe outcomes, not UI behavior.
+- Ask about constraints only when they shape the user experience, scope boundary, or solution direction.
+- When the core frame is already strong, move to fresh questions about prioritization, non-goals, tradeoffs, excluded personas, rollout risk, success evidence, and decision criteria.
+- Do not ask detailed acceptance-criteria, interaction-design, data-model, edge-case, or implementation questions unless they are fundamental to the product framing.
+
+### Drafting Gate
+
+Use these as a readiness check, not as permission to draft:
+
+1. Target user or customer segment.
+2. Current problem and consequence.
+3. One or more user jobs that define the scope.
+4. Expected success criteria or measurable outcomes.
+5. One-paragraph solution direction.
+6. Main scope boundaries or explicit assumption that boundaries are still open.
+
+When these are clear enough but the user has not asked to craft the PRD, say that the frame is ready when useful, then keep asking fresh non-repeated questions. Do not draft, outline, or produce the PRD until the user explicitly asks for it.
 
 ## Preferred Structure
 
@@ -42,46 +76,58 @@ Use this order by default:
 
 1. Title
 2. Situation
-3. Problem
-4. Solution
-5. Jobs to be done
-6. Requirements
+3. Problem space
+4. Jobs to be done
+5. Success criteria
+6. High-level solution
+7. Scope boundaries
+8. Requirements, only when requested or essential
 
 ## Section Rules
 
 **Situation**
-Write prose, not a numbered list. Describe the current landscape, existing product behavior, current challenges, and what is changing in the market or user workflow. Mention existing product surfaces and constraints when they matter. Use short bullets only when listing concrete existing capabilities.
+Write prose, not a numbered list. Explain the current landscape, existing product behavior, workflow pressure, and why this is the right time to solve the problem. Mention existing product surfaces and constraints only when they matter to the framing.
 
-**Problem**
-Use a numbered list. Each item should state a current product/user problem and its consequence. Avoid solution language unless needed to explain why the current state fails.
-
-**Solution**
-Write prose that explains the overall product idea, product direction, and customer value. Blend in any launch-style narrative or value proposition here when useful. Keep detailed behavior in Jobs to be done and Requirements. Describe the product behavior the user should experience, not the implementation plan.
+**Problem space**
+Use a numbered list. Each item should state a current user/product problem and its consequence. Avoid solution language unless needed to explain why the current state fails.
 
 **Jobs to be done**
-Use a numbered list in this form: `When [situation], I want [capability], so I can [outcome].` Keep each job user-centered and independent from implementation.
+Use a numbered list in this form: `When [situation], I want [capability], so I can [outcome].` Treat these jobs as the main scope drivers. Keep each job user-centered, outcome-oriented, and independent from implementation.
+
+**Success criteria**
+Use a numbered list. Describe observable outcomes that indicate the problem has been solved or reduced. Prefer user behavior, workflow completion, quality, adoption, retention, support load, or business signals over implementation milestones. Include metrics only when the user provided them or they can be stated as directional targets.
+
+**High-level solution**
+Write one paragraph by default. Explain the overall product idea, user-facing behavior, customer value, and product direction. Keep detailed behavior in Jobs to be done or optional Requirements. Do not describe the implementation plan.
+
+**Scope boundaries**
+Use short bullets or a numbered list when boundaries matter. Clarify what is in scope now, what is intentionally deferred, and what is out of scope. Omit this section when boundaries would add noise and are already clear from the jobs.
 
 **Requirements**
-Use a numbered list of lean product requirements. Write in sentences, not vague bullets. Requirements should be observable and scoped, but should not over-specify interaction design, technical implementation, edge-case handling, or acceptance criteria unless the user explicitly asks or the detail is fundamental. Include labels like `Functional requirements` or `For [persona/surface] only for now` only when the scope needs to be explicit.
+Use only when requested or essential. Keep requirements lean, numbered, observable, and product-level. Do not over-specify interaction design, technical implementation, edge-case handling, or acceptance criteria. Use `must` for firm product decisions and `should` for strong direction that still leaves implementation discretion.
 
 ## Writing Standards
 
 - Start with why this matters now.
+- Keep the PRD focused on framing and scope, not execution detail.
+- Let jobs to be done define the main shape of scope.
+- Keep the high-level solution to one paragraph unless the user asks for more detail.
 - Prefer concrete product nouns over abstract PM language.
 - Avoid generic sections that add ceremony without decisions.
-- Keep the line between product requirements and implementation details clear.
-- Make every numbered item carry one idea.
 - Preserve the user's domain language when revising an existing PRD, but fix unclear phrasing and obvious typos.
-- If minor non-blocking information is missing, state the assumption in the relevant section instead of inventing specifics. If the missing information affects the problem framing, solution direction, jobs to be done, or a fundamental product requirement, ask clarifying questions before drafting.
+- Make every numbered item carry one idea.
+- Clearly separate problem, job, success outcome, solution direction, and requirement-level detail.
 
 ## Quality Check
 
 Before finalizing, verify:
 
-1. Situation explains the landscape and timing.
-2. Problems are numbered and describe real current pain.
-3. Solutions answer the problems without over-specifying engineering.
-4. Jobs to be done are user-centered.
-5. Requirements are numbered, observable, and not overly prescriptive.
-6. Clarifying questions focused on Problem, Solution, and Jobs to be done before Requirements.
-7. No Status/scope note or Press release section is included unless the user explicitly asks for a different structure.
+1. The Situation explains the landscape and timing.
+2. The Problem space describes real current pain and consequences.
+3. Jobs to be done are user-centered and define the scope.
+4. Success criteria describe outcomes, not implementation tasks.
+5. The High-level solution is one concise paragraph and does not over-specify design or engineering.
+6. Scope boundaries are explicit when they affect interpretation.
+7. Requirements are omitted unless requested or essential, and remain lean if included.
+8. Clarifying questions continued until the user explicitly asked to craft the PRD.
+9. No repeated or semantically duplicate questions were asked across discovery rounds.

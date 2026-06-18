@@ -1,6 +1,6 @@
 ---
 name: write-prd
-description: Draft, revise, or structure product framing PRDs centered on problem space, jobs to be done, success criteria, scope boundaries, and a concise high-level solution. Use when Codex needs to create a PRD, product brief, feature framing document, jobs-to-be-done section, success criteria, scope narrative, or convert rough feature notes into an iterative PRD process that keeps asking fresh, non-repeated clarifying questions until the user explicitly asks to craft the PRD.
+description: Draft, revise, or structure product framing PRDs centered on problem space, jobs to be done, success criteria, scope boundaries, and a concise high-level solution. Use when Codex needs to create a PRD, product brief, feature framing document, jobs-to-be-done section, success criteria, scope narrative, or convert rough feature notes into an iterative PRD process that asks at least one fresh clarification round before drafting, then keeps asking fresh, non-repeated questions until the user explicitly asks to craft the PRD.
 ---
 
 # Write PRD
@@ -9,22 +9,22 @@ description: Draft, revise, or structure product framing PRDs centered on proble
 
 Create framing-first PRDs. The goal is to define the product scope through the problem space, jobs to be done, success criteria, and a concise high-level solution, not to replace design exploration or engineering planning.
 
-Prefer a sharp product narrative over a generic requirements template. Treat each PRD as an iterative discovery artifact: first clarify the frame through as many fresh question rounds as needed, then draft only after the user explicitly asks to craft the PRD.
+Prefer a sharp product narrative over a generic requirements template. Treat each PRD as an iterative discovery artifact: first ask at least one clarification round, then keep clarifying the frame through as many fresh question rounds as needed, and draft only after the user explicitly asks to craft the PRD after discovery has started.
 
 ## Workflow
 
 1. Gather the source material: feature brief, user feedback, current product behavior, target users, related issues, business pressure, screenshots/docs, constraints, and the intended audience.
 2. Start with a short working frame: summarize the apparent user, problem, core job, success outcome, and likely solution direction in 3-5 bullets. Mark uncertain points plainly.
-3. Ask a small batch of high-impact clarifying questions before drafting unless the user's current message explicitly asks to craft, draft, write, or produce the PRD now.
+3. Ask a small batch of high-impact clarifying questions before drafting on every new PRD or substantial framing request. Do not let an initial request to craft, draft, write, or produce the PRD skip this first question round.
 4. Keep the discovery loop active indefinitely while the user keeps answering questions. Ask follow-up questions in focused batches; do not turn this into a long questionnaire.
-5. Never treat a clear frame as permission to draft. Draft only when the user explicitly asks to craft, draft, write, produce, proceed with, or create the PRD. `Stop asking questions` alone is not enough unless it also asks to start the PRD.
+5. Never treat a clear frame as permission to draft. Draft only after at least one clarification round has been asked and the user explicitly asks to craft, draft, write, produce, proceed with, or create the PRD. `Stop asking questions` alone is not enough unless it also asks to start the PRD.
 6. Load `references/prd-template.md` when drafting a full PRD or when the user asks for the preferred structure.
 7. Keep detailed functional requirements optional. Include them only when the user asks for requirements or when a requirement-level decision is necessary to make the scope honest.
 8. State minor non-blocking assumptions in the relevant section. Ask before drafting when missing information could change the problem framing, jobs, success criteria, scope boundaries, or solution direction.
 
 ## Discovery Loop
 
-Use questions to improve framing, not to collect implementation detail. Prefer 3-6 questions per round. Each question should make the eventual draft materially clearer.
+Use questions to improve framing, not to collect implementation detail. Prefer 3-6 questions per round. Each question should make the eventual draft materially clearer. The first round is mandatory for new PRDs and substantial PRD framing changes; an initial draft request does not bypass it.
 
 Maintain a running mental list of questions already asked and topics already answered in the current conversation. Do not ask the same question twice, and do not ask a semantic duplicate with different wording. If an answer is unclear, ask a narrower follow-up that points to the specific unresolved gap instead of repeating the original question.
 
@@ -33,7 +33,7 @@ When asking the first round, use this shape:
 1. `Current frame:` 3-5 bullets summarizing the apparent user, problem, job, success outcome, and solution direction.
 2. `Questions:` 3-6 focused questions ordered by impact.
 
-After each user answer, refresh the `Current frame` only when it helps orient the next round, then ask the next non-repeated questions. Continue this discovery loop until the user explicitly tells you to start crafting the PRD.
+After each user answer, refresh the `Current frame` only when it helps orient the next round, then ask the next non-repeated questions. Continue this discovery loop until the user explicitly tells you to start crafting the PRD after at least one question round has been asked.
 
 After drafting, treat the PRD as a candidate frame. Ask the user to correct the problem space, jobs, success criteria, or solution direction before polishing wording or adding optional requirements.
 
@@ -68,7 +68,7 @@ Use these as a readiness check, not as permission to draft:
 5. One-paragraph solution direction.
 6. Main scope boundaries or explicit assumption that boundaries are still open.
 
-When these are clear enough but the user has not asked to craft the PRD, say that the frame is ready when useful, then keep asking fresh non-repeated questions. Do not draft, outline, or produce the PRD until the user explicitly asks for it.
+When these are clear enough but the user has not asked to craft the PRD after at least one question round, say that the frame is ready when useful, then keep asking fresh non-repeated questions. Do not draft, outline, or produce the PRD until discovery has started and the user explicitly asks for it.
 
 ## Preferred Structure
 
@@ -129,5 +129,5 @@ Before finalizing, verify:
 5. The High-level solution is one concise paragraph and does not over-specify design or engineering.
 6. Scope boundaries are explicit when they affect interpretation.
 7. Requirements are omitted unless requested or essential, and remain lean if included.
-8. Clarifying questions continued until the user explicitly asked to craft the PRD.
+8. At least one clarification round was asked before drafting, and clarifying questions continued until the user explicitly asked to craft the PRD.
 9. No repeated or semantically duplicate questions were asked across discovery rounds.

@@ -1,4 +1,4 @@
 interface:
   display_name: "Write PRD"
   short_description: "Frame PRDs through problems, jobs, and outcomes"
-  default_prompt: "Use $write-prd to turn this feature idea into an iterative PRD frame that keeps asking fresh questions until I ask you to draft."
+  default_prompt: "Use $write-prd to turn this feature idea into an iterative PRD frame that asks a first clarification round before drafting, then keeps asking fresh questions until I ask you to draft."

@@ -1,0 +1,7 @@
+interface:
+  display_name: "AI Coding Competitor Monitor"
+  short_description: "Track AI coding competitors for PMs"
+  default_prompt: "Use $monitor-ai-coding-competitors to prepare a PM-focused digest of changes since the last successful run."
+
+policy:
+  allow_implicit_invocation: true

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated": "2026-07-20",
+  "updated": "2026-07-21",
   "default_lifecycle_status": "active",
   "lifecycle_aliases": [
     {"from":["Gemini CLI","Gemini Code Assist"],"to":"google-antigravity","status":"migrated","effective":"2026-06-18"},
@@ -21,6 +21,7 @@
     {"id":"jetbrains-ai-assistant","name":"JetBrains AI Assistant","category":"general","aliases":["AI Assistant for IntelliJ","JetBrains AI"],"official":["https://blog.jetbrains.com/ai/","https://www.jetbrains.com/ai/"],"community":{"subreddits":["Jetbrains"],"handles":["JetBrains"]}},
     {"id":"devin","name":"Devin","category":"general","aliases":["Devin Desktop","Windsurf","Codeium","Cascade"],"official":["https://docs.devin.ai/release-notes/overview","https://docs.devin.ai/desktop/changelog","https://devin.ai/blog","https://cognition.com/blog"],"community":{"subreddits":["CognitionLabs","windsurf"],"handles":["cognition"]}},
     {"id":"kiro","name":"Kiro","category":"general","aliases":["Kiro IDE","Kiro CLI","Kiro Web","Amazon Q Developer","CodeWhisperer"],"official":["https://kiro.dev/changelog/","https://kiro.dev/changelog/feed.rss","https://kiro.dev/blog/"],"community":{"subreddits":["kiroIDE"],"handles":["kirodotdev"]}},
+    {"id":"kimi-code","name":"Kimi Code","category":"general","aliases":["Kimi","Kimi Code CLI","Kimi K3","Kimi K2.7-Code"],"official":["https://moonshotai.github.io/kimi-cli/en/release-notes/changelog.html","https://www.kimi.com/help/kimi-code/cli-getting-started","https://www.kimi.com/code/docs/en/kimi-code-cli/","https://www.kimi.com/code"],"community":{"subreddits":["kimi","LocalLLaMA"],"handles":["Kimi_Moonshot"]}},
     {"id":"google-jules","name":"Google Jules","category":"general","aliases":["Jules Tools CLI","Jules API"],"official":["https://jules.google/docs/changelog","https://developers.googleblog.com/en/search/?query=Jules"],"community":{"subreddits":["Google"],"handles":["GoogleAI"]}},
     {"id":"conductor-build","name":"Conductor by Melty Labs","category":"general","aliases":["Conductor conductor.build"],"official":["https://www.conductor.build/changelog","https://www.conductor.build/blog","https://www.conductor.build/docs"],"community":{"subreddits":["conductorbuild"],"handles":["conductor_build"]}},
     {"id":"amp","name":"Amp","category":"general","aliases":["Amp Code","Sourcegraph Amp","Amp Neo"],"official":["https://ampcode.com/news"],"community":{"subreddits":["Sourcegraph","ChatGPTCoding"],"handles":["ampcode"]}},

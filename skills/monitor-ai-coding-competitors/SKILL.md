@@ -5,16 +5,16 @@ description: Monitor AI coding tools and adjacent prompt-to-app builders for off
 
 # Monitor AI Coding Competitors
 
-Run a stateful, evidence-first market scan for the configured competitor families in [references/competitors.json](references/competitors.json). The default audience is a Product Manager looking for neutral product patterns and feature inspiration. Keep factual observations, community signals, and interpretation visibly separate.
+Run a stateful, evidence-first market scan for the configured competitor families in [the competitor registry](references/competitors.json). The default audience is a Product Manager looking for neutral product patterns and feature inspiration. Keep factual observations, community signals, and interpretation visibly separate.
 
 ## Run the monitor
 
-1. Read the source registry and the policy in [references/source-policy.md](references/source-policy.md).
+1. Read the source registry and the [source policy](references/source-policy.md).
 2. Open a run window with `scripts/monitor_state.py window`. Use the first-run default of seven days; on later runs use each source's checkpoint with a 48-hour overlap. Explicit dates or a `--days` override take precedence.
 3. Check every configured family’s official changelog, release notes, blog, documentation, repository releases, status page, and issue tracker when present. Prefer RSS/Atom/API surfaces, then paginated official HTML.
 4. Search public web results for Reddit, X, forums, GitHub issues, and reputable news using the registry's aliases and disambiguators. Public social results are sampled, not exhaustive; do not scrape sites or automate logged-in pages.
 5. When available, fan out research by category with subagents. Require each researcher to return normalized findings plus a coverage record. Continue sequentially if subagents are unavailable.
-6. Normalize findings using [references/report-format.md](references/report-format.md). Record event date, publication date, lifecycle, confidence, product surface, source URLs, and whether the item is a new event or a material update. Preserve every distinct version/release published inside the selected window; never replace a family’s in-window history with only its latest item.
+6. Normalize findings using [the report format](references/report-format.md). Record event date, publication date, lifecycle, confidence, product surface, source URLs, and whether the item is a new event or a material update. Preserve every distinct version/release published inside the selected window; never replace a family’s in-window history with only its latest item.
 7. Canonicalize URLs and cluster mirrored coverage. Attach community reactions to the official event instead of creating duplicate events. Do not count cross-posts by one author as independent evidence.
 8. Apply the community-problem threshold in the policy. Treat one concrete security, data-loss, destructive, unauthorized-spend, or account-lockout report as an anecdotal high-impact watch, not a confirmed trend.
 9. Validate the findings and coverage artifacts with `scripts/validate_findings.py`. Render a Markdown report using the required sections below and a companion self-contained HTML dashboard when the workspace output is enabled.
@@ -54,8 +54,8 @@ Write a PM-oriented digest with:
 ## Runtime files
 
 - Store private checkpoints at `~/.cache/codex/monitor-ai-coding-competitors/state.json` (override with `MONITOR_AI_CODING_STATE`).
-- Store reports at `/Users/Gleb.Melnikov/Projects/JetBrains/competitor-intelligence/reports/`.
-- Store the companion dashboard at `/Users/Gleb.Melnikov/Projects/JetBrains/competitor-intelligence/index.html` (or a run-specific `.html` beside the report when requested).
+- Store reports under the workspace’s `competitor-intelligence/reports/` directory (or the configured workspace archive directory).
+- Store the companion dashboard at the workspace’s `competitor-intelligence/index.html` (or a run-specific `.html` beside the report when requested).
 - Store per-run `findings.jsonl`, `coverage.json`, and `run.json` beside the report under `competitor-intelligence/runs/`.
 - Keep metadata, short paraphrases, IDs, timestamps, and links; do not archive a raw Reddit/X corpus.
 

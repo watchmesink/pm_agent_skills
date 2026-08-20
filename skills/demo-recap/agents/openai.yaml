@@ -1,0 +1,4 @@
+interface:
+  display_name: "Demo Recap"
+  short_description: "Turn a demo-call recording into a shareable recap with screenshots and GIFs"
+  default_prompt: "Use $demo-recap to turn this demo recording into a recap I can paste into Slack: what each demo showed, what is still open, plus screenshots and GIFs."

@@ -1,16 +1,28 @@
 # PM Agent Skills
 
-Agent skills for the parts of product management that are real work: turning a demo call into something the team can read, framing a PRD before writing it, and keeping track of what competitors actually shipped.
+Agent skills for the parts of product management that are actual work: framing a PRD before anyone writes requirements, keeping an evidence-backed read on what competitors shipped, and turning a demo call into something the team will read.
 
-Each skill is a folder with a `SKILL.md` your agent reads on demand. Nothing here is a wrapper around a chat prompt — the skills carry workflows, templates, and scripts that do the mechanical parts properly.
+Each skill is a folder with a `SKILL.md` your agent loads on demand. None of them is a wrapper around a chat prompt. They carry workflows, templates, and scripts that do the mechanical parts properly, and they say plainly what they will not do.
 
 ## What's inside
 
-| Skill | What it does | Reach for it when |
-| --- | --- | --- |
-| [demo-recap](skills/demo-recap) | Turns a recording of a demo call into a shareable recap: what each demo showed, how mature it is, what was decided, what is still open, with screenshots and GIFs cut from the video. | You ran a demo or showcase call and the people who missed it need more than "the recording is in the channel". |
-| [write-prd](skills/write-prd) | Drafts a framing-first PRD around problem space, jobs to be done, success criteria, and scope. Asks a clarification round before drafting, and keeps asking until you say draft it. | You have a rough feature idea, a pile of user feedback, or a vague request, and you need the frame straight before anyone writes requirements. |
-| [monitor-ai-coding-competitors](skills/monitor-ai-coding-competitors) | Runs a stateful, evidence-first scan of AI coding tools and prompt-to-app builders: releases, product changes, pricing moves, reliability problems, community signals. Keeps per-source checkpoints and cites every finding. | You want a weekly or since-last-run competitor digest where every claim has a source, and observation stays separate from interpretation. |
+### [write-prd](skills/write-prd)
+
+Turns a rough feature idea into a framing-first PRD built on problem space, jobs to be done, success criteria, and scope boundaries. It asks a clarification round *before* it drafts, then keeps asking fresh questions until you explicitly tell it to write. Requirements stay optional, included only when they are needed to make the scope honest.
+
+**Reach for it when** you have a vague request, a pile of user feedback, or a half-formed idea, and someone is about to start writing requirements against it.
+
+### [monitor-ai-coding-competitors](skills/monitor-ai-coding-competitors)
+
+Runs a stateful, evidence-first scan of AI coding tools and prompt-to-app builders: releases, product changes, pricing and availability moves, reliability problems, and community signals. Every factual claim carries a first-party source, a confidence tier (`confirmed`, `strongly_supported`, `community_signal`, `anecdotal_watch`) and a lifecycle label (`announced`, `preview`, `ga`, `deprecated`, and so on). Per-source checkpoints mean the next run starts where the last one stopped, and it will not collapse three releases from one product into a single "latest update". Outputs a Markdown report plus a deliberately minimal HTML dashboard.
+
+**Reach for it when** you want a weekly or since-last-run competitor digest that keeps what shipped separate from what people are saying about it, without re-reading fourteen changelogs yourself.
+
+### [demo-recap](https://github.com/watchmesink/demo-recap) · separate repo
+
+Turns a recording of a demo call into a recap people will actually read: what each demo showed, how mature it is, what the team decided, what is still open, with screenshots and GIFs cut from the video itself. Detects the spoken language before transcribing, verifies a GIF actually moves before keeping it, and can emit zero-markdown plain text for pasting into Slack.
+
+**Reach for it when** you ran a demo, showcase, or sprint review, and the people who missed it need more than "the recording is in the channel".
 
 ## Install
 
@@ -21,10 +33,10 @@ Using the [skills](https://github.com/vercel-labs/skills) CLI:
 npx skills add watchmesink/pm_agent_skills --list
 
 # install one
-npx skills add watchmesink/pm_agent_skills --skill demo-recap
+npx skills add watchmesink/pm_agent_skills --skill write-prd
 
-# install everything, into a specific agent
-npx skills add watchmesink/pm_agent_skills --skill '*' -a claude-code
+# install everything, globally, into a specific agent
+npx skills add watchmesink/pm_agent_skills --skill '*' -g -a claude-code
 ```
 
 Try one without installing it:
@@ -37,32 +49,36 @@ Or install by hand — a skill is just a directory:
 
 ```bash
 git clone https://github.com/watchmesink/pm_agent_skills
-cp -R pm_agent_skills/skills/demo-recap ~/.claude/skills/    # Claude Code
-cp -R pm_agent_skills/skills/demo-recap ~/.codex/skills/     # Codex
+cp -R pm_agent_skills/skills/write-prd ~/.claude/skills/    # Claude Code
+cp -R pm_agent_skills/skills/write-prd ~/.codex/skills/     # Codex
 ```
 
-Then ask for it by name: `Use demo-recap on ~/Downloads/team-demo.mp4`.
+Then ask for it by name: `Use write-prd to frame this feature idea`.
+
+`demo-recap` installs from [its own repo](https://github.com/watchmesink/demo-recap):
+
+```bash
+npx skills add watchmesink/demo-recap -g
+```
 
 ## Prerequisites
 
-Most skills need nothing beyond the agent. The exception:
+Both skills in this repo run on the agent alone, with no extra binaries to install.
 
-- **demo-recap** needs `ffmpeg`, `ffprobe`, and the `whisper` CLI, because it transcribes and cuts video locally.
-  ```bash
-  brew install ffmpeg && pip install -U openai-whisper
-  ```
+- **write-prd** needs nothing.
+- **monitor-ai-coding-competitors** needs web access, and runs `python3` for its state-checkpoint and finding-validation scripts.
 
-Each skill's README lists its own requirements and what it is allowed to touch.
+`demo-recap` needs `ffmpeg` and a local Whisper install; its own README covers that.
 
 ## Compatibility
 
 The `SKILL.md` format is read by any agent that supports agent skills. Each skill also ships an `agents/openai.yaml` with display metadata for Codex.
 
-Where a skill has been genuinely exercised is noted in its own README. Treat anything not listed there as untested rather than broken.
+Where a skill has been genuinely exercised is noted in its own documentation. Treat anything not listed there as untested rather than broken.
 
 ## Repository layout
 
-```
+```text
 skills/
   <skill-name>/
     SKILL.md              required: frontmatter (name, description) + the workflow
@@ -88,9 +104,9 @@ skills/
 2. Write the workflow as numbered steps a competent stranger could follow. Put failure modes inline, next to the step where they bite — that is what stops the same mistake happening twice.
 3. Move anything long or reusable into `references/`, and anything mechanical into `scripts/`. Link to them from `SKILL.md` with relative links so the agent can open them on demand.
 4. Add a `README.md` covering what you get, prerequisites, a security and permissions note, and known limitations.
-5. Add the skill to the table at the top of this file, with an honest "reach for it when".
+5. Add a section for the skill above, with an honest "reach for it when".
 
-Keeping the table and the per-skill READMEs current is the whole maintenance burden. If a skill's behaviour changes, the description and the table are the two places that must change with it.
+Keeping those sections and the per-skill READMEs current is the whole maintenance burden. If a skill's behaviour changes, its `description` and its section here are the two places that must change with it.
 
 ## License
 

@@ -9,10 +9,10 @@ It exists because the useful part of a demo call is perishable. The decisions li
 A single deliverable folder:
 
 ```
-demo-recap-2026-08-14/
+demo-recap-YYYY-MM-DD/
   SUMMARY.txt                  plain text, ready to paste into Slack
-  01_attachments-input.jpg     one or two stills per demo, presenter webcam cropped out
-  01_attachments.gif           a short GIF where the demo actually moved
+  01_bulk-import.jpg           one or two stills per demo, presenter webcam cropped out
+  01_bulk-import.gif           a short GIF where the demo actually moved
   ...
   _ALL-visuals-preview.jpg     every visual on one sheet, for a last look
   transcript-EN.txt / .srt     the transcript the recap was written from
@@ -48,7 +48,7 @@ Transcription is the slow step. Translating a 55 minute call takes roughly 14 mi
 Point your agent at a recording:
 
 ```
-Use $demo-recap on ~/Downloads/team-demo-2026-08-14.mp4
+Use $demo-recap on ~/Downloads/team-demo.mp4
 ```
 
 Useful things to say alongside it:

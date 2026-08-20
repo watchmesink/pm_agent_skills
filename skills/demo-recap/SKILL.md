@@ -29,7 +29,7 @@ bash "$SK/scripts/media.sh" pdfimages "<notes.pdf>" "<work>/pdf-images"    # emb
 Then skip steps 1–2 and go to step 3 using the transcript timestamps already in the PDF. The extracted images are usually one-per-topic screen grabs — read them, crop out any webcam/meet overlay or OS dock (`crop=w:h:x:y`), and rename per demo. Names in a notes PDF are reliable (there's an attendee list) — unlike whisper. Not every topic will have a captured image; say so rather than forcing a mismatched one. If a clip *is* present, sanity-check its real duration first (`ffprobe`) — a 60-min call that reads as 57s is a truncated export, not the recording.
 
 ### 1. Check the language, THEN transcribe
-Do this before anything else. Recordings from the same team vary: one week's call is Russian, the next week's is English, and a single call can switch between them mid-meeting. On-screen language tells you nothing — the UI and chat content can be Russian while everyone speaks English, and vice versa.
+Do this before anything else. Recordings vary, even within one recurring meeting: one call is in English, the next is not, and a single call can switch language mid-meeting. On-screen language tells you nothing either — the UI and pasted content can be in one language while everyone speaks another.
 
 ```bash
 bash "$SK/scripts/media.sh" lang "<video>"              # samples ~20% in
@@ -45,7 +45,7 @@ Sample more than one point; a mixed-language call only shows up if you look twic
 
 Why this order matters: pointing an English-only model (`*.en`) at non-English audio **does not fail**. It returns fluent, confident nonsense — "we have aliens going around", invented product names — and it is easy to waste half an hour before noticing. The reverse mistake is cheap: `--task translate` with the wrong `--language` pin, or over code-switching, still produces a near-identical English transcript, so when unsure prefer `translate`.
 
-`translate` runs ~300–500 frames/s on an idle CPU (55 min of audio in ~14 min). Don't downgrade to `base` for translation — it mangles exactly the product terms the recap depends on ("split button" became "front button").
+`translate` runs ~300–500 frames/s on an idle CPU (55 min of audio in ~14 min). Don't downgrade to `base` for translation — it mangles exactly the product terms the recap depends on, turning UI control names into unrelated words.
 
 Transcription is the long pole, so **start it in the background and map the video visually while it runs** (step 2). Output: `audio.txt` + timestamped `audio.srt`. **Read the whole `.txt`** — it's the source of truth. Clean up obvious mis-hearings from context, and never trust its spelling of names.
 
